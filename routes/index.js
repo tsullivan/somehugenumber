@@ -28,6 +28,13 @@ function parseBlogDataBody(body) {
 }
 
 /*
+ * GET blog index
+ */
+router.get('/blog', function(req, res, next) {
+	res.render('blog', { title: 'Blog' });
+});
+
+/*
  * GET blog articles data
  */
 router.get('/blog-data', function(req, res, next) {
