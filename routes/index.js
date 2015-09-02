@@ -1,3 +1,4 @@
+/*eslint-disable no-unused-vars*/
 var express = require('express'),
 	request = require('request');
 
@@ -7,7 +8,7 @@ var router = express.Router(),
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+	res.render('index', { title: 'Express' });
 });
 
 /* Get
@@ -45,7 +46,7 @@ router.get('/blog-data', function(req, res, next) {
 			err = err || 'Error in fetching blogs!';
 			return next(err);
 		}
-	})
+	});
 });
 
 module.exports = router;
