@@ -13,10 +13,11 @@ var router = express.Router(),
 function parseBlogDataBody(body) {
 	body = JSON.parse(body);
 	return body.posts.map(function (post) {
+		var postDate = new Date(post.modified);
 		return {
 			id: post.ID,
 			slug: post.slug,
-			date: post.modified,
+			date: [postDate.getFullYear(), postDate.getMonth() + 1, postDate.getDate()].join('-'),
 			title: post.title,
 			content: post.content
 		};
