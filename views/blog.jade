@@ -1,19 +1,16 @@
 extends layout
 
 block content
+  script(type='text/ng-template' id='list.html')
+    div(ng-repeat='(key, post) in posts')
+      a(href='#/{{post.id}}/{{post.date}}/{{post.slug}}') {{post.title}}
+
   script(type='text/ng-template' id='post.html')
     div(ng-bind-html='postContent')
 
   h1= title
 
   div(ng-controller='MainBlogController')
-
-    div(ng-controller='ListController')
-      p List the posts
-
-      span(ng-if='error') There was an error. Status code: {{status}}
-
-      div(ng-repeat='(key, post) in posts')
-        a(href='#/{{post.id}}/{{post.date}}/{{post.slug}}') {{post.title}}
+    span(ng-if='error') There was an error. Status code: {{status}}
 
     div(ng-view)

@@ -1,11 +1,13 @@
 doctype html
 html
+
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body(ng-app='somehugenumberApp')
-    div(ng-controller='somehugenumberAppTest')
-      span I can add: {{a}} + {{b}} =  {{ a+b }}
+
     block content
+
     script(src='/javascripts/vendor.js')
     script(src='/javascripts/bundle.js')
