@@ -1,15 +1,27 @@
 angular
 	.module('somehugenumberApp', ['ngRoute'])
+
 	.controller('somehugenumberAppTest', function ($scope) {
 		$scope.a = 1;
 		$scope.b = 2;
 	})
-	.controller('somehugenumberAppPosts', ['$scope', '$http',
-			function ($scope, $http) {
+
+	.controller('MainBlogController', function ($scope, $route, $routeParams, $location) {
+		$scope.$route = $route;
+		$scope.$location = $location;
+		$scope.$routeParams = $routeParams;
+	})
+
+	/*
+	 * List blog posts
+	 */
+	.controller('ListController', ['$scope', '$routeParams', '$http',
+			function ($scope, $routeParams, $http) {
+				$scope.$routeParams = $routeParams;
+
 				$scope.method = 'GET';
-				$scope.url = '/blog/data';
-				$scope.code = null;
-				$scope.response = null;
+				$scope.url = '/blog/posts';
+				$scope.params = '/blog/posts';
 
 				$http({method: $scope.method, url: $scope.url}).
 					then(function (response) {
@@ -17,6 +29,34 @@ angular
 						$scope.posts = response.data;
 					}, function (response) {
 						$scope.status = response.status;
-						$scope.data = response.data || 'Request failed';
+						$scope.error = 'Request failed';
 					});
-			}]);
+			}])
+
+	/*
+	 * Show single blog post
+	 */
+	.controller('PostController', ['$scope', '$routeParams', '$http',
+			function ($scope, $routeParams, $http) {
+				$scope.$routeParams = $routeParams;
+
+				$scope.method = 'GET';
+				$scope.url = '/blog/posts/' + $routeParams.postId;
+
+				$http({method: $scope.method, url: $scope.url}).
+					then(function (response) {
+						$scope.status = response.status;
+						$scope.post = response.data;
+					}, function (response) {
+						$scope.status = response.status;
+						$scope.error = 'Request failed';
+					});
+			}])
+
+	.config(function($routeProvider) {
+		$routeProvider
+			.when('/:postId/:postDate/:postSlug', {
+				controller: 'PostController',
+				template: '{{post.content}}'
+			});
+	});

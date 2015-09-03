@@ -3,7 +3,14 @@ extends layout
 block content
   h1= title
 
-  div(ng-controller='somehugenumberAppPosts')
-    p List the posts
-    div(ng-repeat='(key, post) in posts')
-      a(href='/blog/#/{{post.id}}/{{post.date}}/{{post.slug}}/') {{post.title}}
+  div(ng-controller='MainBlogController')
+
+    div(ng-controller='ListController')
+      p List the posts
+
+      span(ng-if='error') There was an error. Status code: {{status}}
+
+      div(ng-repeat='(key, post) in posts')
+        a(href='#/{{post.id}}/{{post.date}}/{{post.slug}}') {{post.title}}
+
+    div(ng-view)
