@@ -13,7 +13,8 @@ gulp.task('webpack', function() {
 gulp.task('vendor', function() {
 	return gulp.src([
 		'public/app/bower_components/angular/angular.js',
-		'public/app/bower_components/angular-route/angular-route.js'
+		'public/app/bower_components/angular-route/angular-route.js',
+		'public/app/bower_components/angular-sanitize/angular-sanitize.js'
 	])
 	.pipe(concat('vendor.js'))
 	.pipe(gulp.dest('public/javascripts/'));

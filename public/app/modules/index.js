@@ -1,5 +1,5 @@
 angular
-	.module('somehugenumberApp', ['ngRoute'])
+	.module('somehugenumberApp', ['ngRoute', 'ngSanitize'])
 
 	.controller('somehugenumberAppTest', function ($scope) {
 		$scope.a = 1;
@@ -36,8 +36,8 @@ angular
 	/*
 	 * Show single blog post
 	 */
-	.controller('PostController', ['$scope', '$routeParams', '$http',
-			function ($scope, $routeParams, $http) {
+	.controller('PostController', ['$scope', '$routeParams', '$http', '$sce',
+			function ($scope, $routeParams, $http, $sce) {
 				$scope.$routeParams = $routeParams;
 
 				$scope.method = 'GET';
@@ -47,6 +47,7 @@ angular
 					then(function (response) {
 						$scope.status = response.status;
 						$scope.post = response.data;
+						$scope.postContent = $sce.trustAsHtml(response.data.content);
 					}, function (response) {
 						$scope.status = response.status;
 						$scope.error = 'Request failed';
@@ -57,6 +58,6 @@ angular
 		$routeProvider
 			.when('/:postId/:postDate/:postSlug', {
 				controller: 'PostController',
-				template: '{{post.content}}'
+				template: '<div ng-bind-html="postContent"></div>'
 			});
 	});
