@@ -37,7 +37,7 @@ router.get('/posts', function(req, res, next) {
  * GET blog index
  */
 router.get('/', function(req, res, next) {
-	res.render('blog', { title: 'Blog' });
+	res.render('blog', { title: 'Some Huge Number - Blog' });
 });
 
 module.exports = router;

@@ -2,15 +2,29 @@ extends layout
 
 block content
   script(type='text/ng-template' id='list.html')
+    span(ng-if='error') There was an error. Status code: {{status}}. {{error}}
+
     div(ng-repeat='(key, post) in posts')
-      a(href='#/{{post.id}}/{{post.date}}/{{post.slug}}') {{post.title}}
+      ul
+        li
+          a(href='#/{{post.id}}/{{post.slug}}/{{post.shortdate}}') {{post.title}}
+
+    p
+      a(href='/') Home
 
   script(type='text/ng-template' id='post.html')
-    div(ng-bind-html='postContent')
+    span(ng-if='error') There was an error. Status code: {{status}}. {{error}}
+
+    h2 {{post.title}}
+
+    div(ng-bind-html='post.content')
+
+    p {{post.longdate}}
+
+    p
+      a(href='/blog/') Back
 
   h1= title
 
   div(ng-controller='MainBlogController')
-    span(ng-if='error') There was an error. Status code: {{status}}
-
     div(ng-view)

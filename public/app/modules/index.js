@@ -11,7 +11,7 @@ angular
 
 	.config(function($routeProvider) {
 		$routeProvider
-			.when('/:postId/:postDate/:postSlug', {
+			.when('/:postId/:postSlug/:postDate', {
 				controller: 'PostController',
 				templateUrl: 'post.html'
 			})

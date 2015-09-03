@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 module.exports = {
 	getUrl: function (id) {
 		var baseUrl = 'https://public-api.wordpress.com/rest/v1.1/' +
@@ -21,6 +23,7 @@ module.exports = {
 	},
 
 	/*
+	 * Maintains list objects
 	 * @param results: response of set of posts
 	 */
 	list: function (results) {
@@ -38,6 +41,7 @@ module.exports = {
 	},
 
 	/*
+	 * Maintains post objects
 	 * @param post: response of post body, with content, etc
 	 */
 	post: function (postObj) {
@@ -48,13 +52,11 @@ module.exports = {
 			},
 
 			parsePost: function() {
-				var postDate = new Date(postObj.modified);
-				postDate = [postDate.getFullYear(), postDate.getMonth() + 1, postDate.getDate()].join('-');
-
 				return {
 					id: postObj.ID,
 					slug: postObj.slug,
-					date: postDate,
+					shortdate: moment(postObj.date).format('MM-DD-YY'),
+					date: moment(postObj.date).format('MMMM Do YYYY, h:mm:ss a'),
 					title: postObj.title,
 					content: postObj.content
 				};

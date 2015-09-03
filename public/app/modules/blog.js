@@ -36,7 +36,7 @@ angular
 					then(function (response) {
 						$scope.status = response.status;
 						$scope.post = response.data;
-						$scope.postContent = $sce.trustAsHtml(response.data.content);
+						$scope.post.content = $sce.trustAsHtml(response.data.content);
 					}, function (response) {
 						$scope.status = response.status;
 						$scope.error = 'Request failed';
