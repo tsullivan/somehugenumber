@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  script(type='text/ng-template' id='post.html')
+    div(ng-bind-html='postContent')
+
   h1= title
 
   div(ng-controller='MainBlogController')

@@ -58,6 +58,6 @@ angular
 		$routeProvider
 			.when('/:postId/:postDate/:postSlug', {
 				controller: 'PostController',
-				template: '<div ng-bind-html="postContent"></div>'
+				templateUrl: 'post.html'
 			});
 	});
