@@ -1,6 +1,22 @@
 angular
 	.module('somehugenumberApp', ['ngRoute', 'ngSanitize'])
 
+	.controller('MainBlogController', function ($scope, $routeParams) {
+		$scope.$routeParams = $routeParams;
+	})
+
+	.config(function($routeProvider) {
+		$routeProvider
+			.when('/:postId/:postSlug/:postDate', {
+				controller: 'PostController',
+				templateUrl: 'post.html'
+			})
+			.otherwise({
+				controller: 'ListController',
+				templateUrl: 'list.html'
+			});
+	})
+
 	/*
 	 * List blog posts
 	 */
