@@ -5,7 +5,9 @@
   "scripts": {
     "start": "node ./bin/www",
     "debug": "node debug ./bin/www",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "gulp",
+    "postinstall": "bower install && npm run-script build"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
