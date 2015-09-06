@@ -1,3 +1,5 @@
+var blogModel = require('models/blog');
+
 angular
 	.module('somehugenumberApp', ['ngRoute', 'ngSanitize'])
 
@@ -31,10 +33,10 @@ angular
 				$http({method: $scope.method, url: $scope.url}).
 					then(function (response) {
 						$scope.status = response.status;
-						$scope.posts = response.data;
+						$scope.list = blogModel.list(response.data);
 					}, function (response) {
 						$scope.status = response.status;
-						$scope.error = 'Request failed';
+						$scope.error = blogModel.getError('Request failed');
 					});
 			}])
 
@@ -51,11 +53,11 @@ angular
 				$http({method: $scope.method, url: $scope.url}).
 					then(function (response) {
 						$scope.status = response.status;
-						$scope.post = response.data;
+						$scope.post = blogModel.post(response.data);
 						$scope.post.content = $sce.trustAsHtml(response.data.content);
 					}, function (response) {
 						$scope.status = response.status;
-						$scope.error = 'Request failed';
+						$scope.error = blogModel.getError('Request failed');
 					});
 			}]);
 

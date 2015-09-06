@@ -16,6 +16,7 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
+			models: path.resolve(__dirname, './models')
 		}
 	},
 	plugins: [

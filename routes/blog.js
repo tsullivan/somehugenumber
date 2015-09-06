@@ -10,9 +10,14 @@ var router = express.Router();
  */
 router.get('/posts/:id', function(req, res, next) {
 	request(model.getUrl(req.params.id), function (err, response, body) {
+		var post;
+
 		if (!err && response.statusCode == 200) {
+			// Retrive the data object
+			post = JSON.parse(body);
+
 			// Create a model for the response and render as JSON
-			return res.json(model.post(body).parsePostJson());
+			return res.json(model.post(post));
 		}
 
 		return next(model.getError(err, response));
@@ -24,9 +29,14 @@ router.get('/posts/:id', function(req, res, next) {
  */
 router.get('/posts', function(req, res, next) {
 	request(model.getUrl(), function (err, response, body) {
+		var posts;
+
 		if (!err && response.statusCode == 200) {
+			// Retrive the data objects
+			posts = JSON.parse(body).posts;
+
 			// Create a model for the response and render as JSON
-			return res.json(model.list(body).parseListJson());
+			return res.json(model.list(posts));
 		}
 
 		return next(model.getError(err, response));
