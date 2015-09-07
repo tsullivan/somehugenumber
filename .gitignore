@@ -1,0 +1,7 @@
+npm-debug.log
+node_modules
+public/app/bower_components
+public/javascripts/bundle.js
+public/javascripts/bundle.js.map
+public/javascripts/vendor.js
+public/javascripts/vendor.js.map
