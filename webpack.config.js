@@ -8,16 +8,13 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.css$/, loader: 'style!css'},
-			{ test: /\.scss$/, loader: 'style-loader!css-loader!autoprefixer-loader!sass-loader'},
-			{ test: /\.png$/, loader: 'url-loader?limit=100000&mimetype=image/png' },
-			{ test: /\.jpg$/, loader: 'file-loader' }
+			{ test: /\.css$/, loader: 'style!css'}
 		]
 	},
 	resolve: {
 		alias: {
 			'angular-ui-bootstrap': path.resolve(__dirname, './public/app/bower_components/angular-bootstrap'),
-			models: path.resolve(__dirname, './models')
+			'models': path.resolve(__dirname, './models')
 		}
 	},
 	plugins: [

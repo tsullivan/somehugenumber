@@ -1,3 +1,6 @@
+require("!style!css!less!../../stylesheets/custom-bootstrap.less");
+require('!style!css!../../stylesheets/style.css');
+
 var uibs = require('angular-ui-bootstrap'),
 	blogModel = require('models/blog');
 
