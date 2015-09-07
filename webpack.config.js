@@ -16,6 +16,7 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
+			'angular-ui-bootstrap': path.resolve(__dirname, './public/app/bower_components/angular-bootstrap'),
 			models: path.resolve(__dirname, './models')
 		}
 	},

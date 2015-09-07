@@ -1,7 +1,8 @@
-var blogModel = require('models/blog');
+var uibs = require('angular-ui-bootstrap'),
+	blogModel = require('models/blog');
 
 angular
-	.module('somehugenumberApp', ['ngRoute', 'ngSanitize'])
+	.module('somehugenumberApp', ['ngRoute', 'ngSanitize', uibs])
 
 	.controller('MainBlogController', function ($scope, $routeParams) {
 		$scope.$routeParams = $routeParams;
