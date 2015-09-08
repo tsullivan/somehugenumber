@@ -10,9 +10,9 @@ module.exports = {
 	entry: {
 		app: path.resolve(__dirname, 'app', 'main.js'),
 		vendor: [
-			path.resolve(bowerPath, 'angular', 'angular.js'),
-			path.resolve(bowerPath, 'angular-route', 'angular-route.js'),
-			path.resolve(bowerPath, 'angular-sanitize', 'angular-sanitize.js')
+			path.resolve(bowerPath, 'angular', 'angular.min.js'),
+			path.resolve(bowerPath, 'angular-route', 'angular-route.min.js'),
+			path.resolve(bowerPath, 'angular-sanitize', 'angular-sanitize.min.js')
 		]
 	},
 	output: {
