@@ -2,7 +2,14 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-	entry: './public/app/modules/index.js',
+	entry: {
+		app: './public/app/modules/index.js',
+		vendor: [
+			'./public/app/bower_components/angular/angular.min.js',
+			'./public/app/bower_components/angular-route/angular-route.min.js',
+			'./public/app/bower_components/angular-sanitize/angular-sanitize.min.js'
+		]
+	},
 	output: {
 		filename: 'public/javascripts/bundle.js'
 	},
@@ -19,8 +26,6 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.optimize.DedupePlugin(),
-		new webpack.ProvidePlugin({
-			_: 'lodash'
-		})
+		new webpack.optimize.CommonsChunkPlugin('vendor', 'public/javascripts/vendor.js')
 	]
 };
