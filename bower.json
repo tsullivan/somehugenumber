@@ -8,10 +8,8 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "public/app/bower_components",
-    "test",
-    "tests"
+    "app/bower_components",
+    "test"
   ],
   "dependencies": {
     "angular": "~1.4.5",

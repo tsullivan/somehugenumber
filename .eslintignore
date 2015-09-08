@@ -1,3 +1,2 @@
-public/app/bower_components
-public/javascripts/bundle.js
-public/javascripts/vendor.js
+app/bower_components
+public/build

@@ -1,17 +1,24 @@
 var webpack = require('webpack');
 var path = require('path');
+var buildPath = path.resolve(__dirname, 'public', 'build');
+var bowerPath = path.resolve(__dirname, 'app', 'bower_components');
 
 module.exports = {
+	// Makes sure errors in console map to the correct file
+	// and line number
+	devtool: 'eval',
 	entry: {
-		app: './public/app/modules/index.js',
+		app: path.resolve(__dirname, 'app', 'main.js'),
 		vendor: [
-			'./public/app/bower_components/angular/angular.min.js',
-			'./public/app/bower_components/angular-route/angular-route.min.js',
-			'./public/app/bower_components/angular-sanitize/angular-sanitize.min.js'
+			path.resolve(bowerPath, 'angular', 'angular.js'),
+			path.resolve(bowerPath, 'angular-route', 'angular-route.js'),
+			path.resolve(bowerPath, 'angular-sanitize', 'angular-sanitize.js')
 		]
 	},
 	output: {
-		filename: 'public/javascripts/bundle.js'
+		path: buildPath,
+		filename: 'bundle.js',
+		publicPath: '/build/'
 	},
 	module: {
 		loaders: [
@@ -20,12 +27,12 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			'angular-ui-bootstrap': path.resolve(__dirname, './public/app/bower_components/angular-bootstrap'),
-			'models': path.resolve(__dirname, './models')
+			'angular-ui-bootstrap': path.resolve(bowerPath, 'angular-bootstrap'),
+			'models': path.resolve(__dirname, 'models')
 		}
 	},
 	plugins: [
 		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.CommonsChunkPlugin('vendor', 'public/javascripts/vendor.js')
+		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
 	]
 };
