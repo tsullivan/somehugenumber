@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "debug": "node debug ./bin/www",
-    "lint": "eslint .",
+    "test": "mocha && eslint .",
     "devbuild": "webpack -d",
     "prodbuild": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "postinstall": "bower install"
@@ -28,6 +28,7 @@
     "eslint-plugin-angular": "^0.11.0",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
+    "mocha": "^2.3.2",
     "path": "^0.11.14",
     "style-loader": "^0.12.3",
     "webpack": "^1.12.0"
