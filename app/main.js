@@ -10,7 +10,7 @@ angular
 		$scope.$routeParams = $routeParams;
 	})
 
-	.config(function($routeProvider) {
+	.config(function($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/:postId/:postSlug/:postDate', {
 				controller: 'PostController',
@@ -20,6 +20,8 @@ angular
 				controller: 'ListController',
 				templateUrl: 'list.html'
 			});
+
+			$locationProvider.html5Mode(true);
 	})
 
 	/*

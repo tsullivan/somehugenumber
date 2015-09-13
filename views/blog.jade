@@ -1,12 +1,15 @@
 extends layout
 
+block headtags
+  base(href='/blog/')
+
 block content
   script(type='text/ng-template' id='list.html')
     span(ng-if='error') There was an error. Status code: {{status}}. {{error}}
 
     ul
       li(ng-repeat='(key, post) in list')
-        a(href='#/{{post.id}}/{{post.slug}}/{{post.shortdate}}') {{post.title}}
+        a(href='/blog/{{post.id}}/{{post.slug}}/{{post.shortdate}}') {{post.title}}
 
     p
       a(href='/') Home
