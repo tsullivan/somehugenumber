@@ -7,26 +7,33 @@ block content
   script(type='text/ng-template' id='list.html')
     span(ng-if='error') There was an error. Status code: {{status}}. {{error}}
 
+    p Recent posts
+
     ul
       li(ng-repeat='(key, post) in list')
         a(href='/blog/{{post.id}}/{{post.slug}}/{{post.shortdate}}') {{post.title}}
 
-    p
+    p(class='homebar')
       a(href='/') Home
 
   script(type='text/ng-template' id='post.html')
     span(ng-if='error') There was an error. Status code: {{status}}. {{error}}
 
+    p(class='homefloater')
+      a(href='/') Home
+
     h2 {{post.title}}
 
     div(ng-bind-html='post.content')
 
-    p {{post.longdate}}
+    p(class='dateline')
+      i Posted: {{post.longdate}}
 
-    p
+    p(class='homebar')
       a(href='/blog/') Back
 
-  h1= title
+  div(class='titlecontainer')
+    h1= title
 
-  div(ng-controller='MainBlogController')
+  div(ng-controller='MainBlogController' class='main')
     div(ng-view)

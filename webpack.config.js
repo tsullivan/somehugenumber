@@ -22,7 +22,8 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.css$/, loader: 'style!css'}
+			{ test: /\.css$/, loader: 'style!css'},
+			{ test: /\.sass$/, loader: 'style!css!sass?indentedSyntax'}
 		]
 	},
 	resolve: {
