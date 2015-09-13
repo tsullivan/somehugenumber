@@ -1,11 +1,10 @@
 require('!style!css!less!./custom-bootstrap.less');
 require('!style!css!./style.css');
 
-var uibs = require('angular-ui-bootstrap'),
-	blogModel = require('models/blog');
+var blogModel = require('models/blog');
 
 angular
-	.module('somehugenumberApp', ['ngRoute', 'ngSanitize', uibs])
+	.module('somehugenumberApp', ['ngRoute', 'ngSanitize'])
 
 	.controller('MainBlogController', function ($scope, $routeParams) {
 		$scope.$routeParams = $routeParams;
