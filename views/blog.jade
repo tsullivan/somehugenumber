@@ -4,10 +4,9 @@ block content
   script(type='text/ng-template' id='list.html')
     span(ng-if='error') There was an error. Status code: {{status}}. {{error}}
 
-    div(ng-repeat='(key, post) in list')
-      ul
-        li
-          a(href='#/{{post.id}}/{{post.slug}}/{{post.shortdate}}') {{post.title}}
+    ul
+      li(ng-repeat='(key, post) in list')
+        a(href='#/{{post.id}}/{{post.slug}}/{{post.shortdate}}') {{post.title}}
 
     p
       a(href='/') Home
