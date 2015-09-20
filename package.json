@@ -6,8 +6,8 @@
     "start": "node ./bin/www",
     "debug": "node debug ./bin/www",
     "test": "mocha && eslint .",
-    "devbuild": "webpack -d",
-    "prodbuild": "NODE_ENV=production webpack -p --config webpack.production.config.js",
+    "dev": "webpack --progress --colors --watch",
+    "prod": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "postinstall": "bower install"
   },
   "dependencies": {

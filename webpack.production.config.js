@@ -3,7 +3,7 @@ var path = require('path');
 var buildPath = path.resolve(__dirname, 'public', 'build');
 var bowerPath = path.resolve(__dirname, 'app', 'bower_components');
 
-module.exports = {
+var config = {
 	devtool: 'source-map',
 	entry: {
 		app: path.resolve(__dirname, 'app', 'main.js'),
@@ -18,11 +18,7 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/build/'
 	},
-	module: {
-		loaders: [
-			{ test: /\.css$/, loader: 'style!css'}
-		]
-	},
+	module: require('./config/webpackLoaders'),
 	resolve: {
 		alias: {
 			'angular-ui-bootstrap': path.resolve(bowerPath, 'angular-bootstrap'),
@@ -34,3 +30,5 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
 	]
 };
+
+module.exports = config;

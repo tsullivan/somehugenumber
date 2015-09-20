@@ -3,6 +3,6 @@
 Getting started:
 ```
 npm install
-npm run-script devbuild
 npm start
+npm run-script fe-dev
 ```
