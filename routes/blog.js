@@ -1,15 +1,24 @@
 /*eslint-disable no-unused-vars*/
 var express = require('express'),
 	request = require('request'),
-	model = require('../models/blog');
+	model = require('../models/blog'),
+	_ = require('lodash');
 
 var router = express.Router();
+
+// simple memory cache
+var postsCache = {};
 
 /*
  * GET blog post content
  */
 router.get(/^\/posts\/(\d+)$/, function(req, res, next) {
 	var postId = req.params[0];
+	// if in the cache, return early
+	if (_.has(postsCache, postId)) {
+		return res.json(postsCache[postId]);
+	}
+
 	request(model.getUrl(postId), function (err, response, body) {
 		var post;
 
@@ -18,6 +27,7 @@ router.get(/^\/posts\/(\d+)$/, function(req, res, next) {
 			post = model.post(JSON.parse(body));
 
 			// Create a model for the response and render as JSON
+			postsCache[postId] = post;
 			return res.json(post);
 		}
 
