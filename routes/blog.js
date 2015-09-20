@@ -8,16 +8,17 @@ var router = express.Router();
 /*
  * GET blog post content
  */
-router.get('/posts/:id', function(req, res, next) {
-	request(model.getUrl(req.params.id), function (err, response, body) {
+router.get(/^\/posts\/(\d+)$/, function(req, res, next) {
+	var postId = req.params[0];
+	request(model.getUrl(postId), function (err, response, body) {
 		var post;
 
 		if (!err && response.statusCode == 200) {
-			// Retrive the data object
-			post = JSON.parse(body);
+			// Retrive the data object and construct post object
+			post = model.post(JSON.parse(body));
 
 			// Create a model for the response and render as JSON
-			return res.json(model.post(post));
+			return res.json(post);
 		}
 
 		return next(model.getError(err, response));
