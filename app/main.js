@@ -7,18 +7,19 @@ angular
 	.module('somehugenumberApp', ['ngRoute', 'ngSanitize'])
 
 	.controller('MainBlogController', function ($scope, $routeParams) {
+		var vm = this;
 		require('./blog.sass'); // blog-specific style
-		$scope.$routeParams = $routeParams;
+		vm.$routeParams = $routeParams;
 	})
 
 	.config(function($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/:postId/:postSlug/:postDate', {
-				controller: 'PostController',
+				controller: 'PostController as post',
 				templateUrl: 'post.html'
 			})
 			.otherwise({
-				controller: 'ListController',
+				controller: 'ListController as list',
 				templateUrl: 'list.html'
 			});
 
@@ -30,19 +31,20 @@ angular
 	 */
 	.controller('ListController', ['$scope', '$routeParams', '$http',
 			function ($scope, $routeParams, $http) {
-				$scope.$routeParams = $routeParams;
+				var vm = this;
+				vm.$routeParams = $routeParams;
 
-				$scope.method = 'GET';
-				$scope.url = '/blog/posts';
-				$scope.params = '/blog/posts';
+				vm.method = 'GET';
+				vm.url = '/blog/posts';
+				vm.params = '/blog/posts';
 
-				$http({method: $scope.method, url: $scope.url}).
+				$http({method: vm.method, url: vm.url}).
 					then(function (response) {
-						$scope.status = response.status;
-						$scope.list = blogModel.list(response.data);
+						vm.status = response.status;
+						vm.list = blogModel.list(response.data);
 					}, function (response) {
-						$scope.status = response.status;
-						$scope.error = blogModel.getError('Request failed');
+						vm.status = response.status;
+						vm.error = blogModel.getError('Request failed');
 					});
 			}])
 
@@ -51,19 +53,22 @@ angular
 	 */
 	.controller('PostController', ['$scope', '$routeParams', '$http', '$sce',
 			function ($scope, $routeParams, $http, $sce) {
-				$scope.$routeParams = $routeParams;
+				var vm = this;
+				vm.$routeParams = $routeParams;
 
-				$scope.method = 'GET';
-				$scope.url = '/blog/posts/' + $routeParams.postId;
+				vm.method = 'GET';
+				vm.url = '/blog/posts/' + $routeParams.postId;
 
-				$http({method: $scope.method, url: $scope.url}).
+				$http({method: vm.method, url: vm.url}).
 					then(function (response) {
-						$scope.status = response.status;
-						$scope.post = blogModel.post(response.data);
-						$scope.post.content = $sce.trustAsHtml(response.data.content);
+						var post = blogModel.post(response.data);
+						vm.status = response.status;
+						vm.title = post.title;
+						vm.longdate = post.longdate;
+						vm.content = $sce.trustAsHtml(response.data.content);
 					}, function (response) {
-						$scope.status = response.status;
-						$scope.error = blogModel.getError('Request failed');
+						vm.status = response.status;
+						vm.error = blogModel.getError('Request failed');
 					});
 			}]);
 

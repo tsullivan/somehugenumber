@@ -5,19 +5,19 @@ block headtags
 
 block content
   script(type='text/ng-template' id='list.html')
-    span(ng-if='error') There was an error. Status code: {{status}}. {{error}}
+    span(ng-if='list.error') There was an error. Status code: {{list.status}}. {{list.error}}
 
     p Recent posts
 
     ul
-      li(ng-repeat='(key, post) in list')
+      li(ng-repeat='(key, post) in list.list')
         a(href='/blog/{{post.id}}/{{post.slug}}/{{post.shortdate}}') {{post.title}}
 
     p(class='homebar')
       a(href='/') Home
 
   script(type='text/ng-template' id='post.html')
-    span(ng-if='error') There was an error. Status code: {{status}}. {{error}}
+    span(ng-if='post.error') There was an error. Status code: {{post.status}}. {{post.error}}
 
     p(class='homefloater')
       a(href='/') Home
