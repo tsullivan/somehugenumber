@@ -4,7 +4,7 @@ var buildPath = path.resolve(__dirname, 'public', 'build');
 var bowerPath = path.resolve(__dirname, 'app', 'bower_components');
 
 var config = {
-	devtool: 'source-map',
+	devtool: false,
 	entry: {
 		app: path.resolve(__dirname, 'app', 'main.js'),
 		vendor: [

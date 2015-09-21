@@ -4,8 +4,6 @@ var buildPath = path.resolve(__dirname, 'public', 'build');
 var bowerPath = path.resolve(__dirname, 'app', 'bower_components');
 
 var config = {
-	// Makes sure errors in console map to the correct file
-	// and line number
 	devtool: 'eval',
 	entry: {
 		app: [
