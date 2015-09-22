@@ -6,13 +6,14 @@ var blogModel = require('models/blog');
 angular
 	.module('somehugenumberApp', ['ngRoute', 'ngSanitize'])
 
-	.controller('MainBlogController', function ($scope, $routeParams) {
-		var vm = this;
-		require('./blog.sass'); // blog-specific style
-		vm.$routeParams = $routeParams;
-	})
+	.controller('MainBlogController', ['$scope', '$routeParams',
+			function ($scope, $routeParams) {
+				var vm = this;
+				require('./blog.sass'); // blog-specific style
+				vm.$routeParams = $routeParams;
+			}])
 
-	.config(function($routeProvider, $locationProvider) {
+	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/:postId/:postSlug/:postDate', {
 				controller: 'PostController as post',
@@ -24,7 +25,7 @@ angular
 			});
 
 			$locationProvider.html5Mode(true);
-	})
+	}])
 
 	/*
 	 * List blog posts
