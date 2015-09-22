@@ -5,15 +5,26 @@ var express = require('express'),
 	_ = require('lodash');
 
 var router = express.Router();
+var postsCache = {}; // simple memory cache
 
-// simple memory cache
-var postsCache = {};
+function loadCache() {
+	request(model.getUrl(), function (err, response, body) {
+		var posts;
+
+		if (!err && response.statusCode == 200) {
+			// Retrive the data objects and cache them
+			posts = model.list(JSON.parse(body).posts);
+			postsCache = _.indexBy(posts, 'id');
+		}
+	});
+}
 
 /*
  * GET blog post content
  */
 router.get(/^\/posts\/(\d+)$/, function(req, res, next) {
 	var postId = req.params[0];
+
 	// if in the cache, return early
 	if (_.has(postsCache, postId)) {
 		return res.json(postsCache[postId]);
@@ -39,6 +50,16 @@ router.get(/^\/posts\/(\d+)$/, function(req, res, next) {
  * GET blog posts list
  */
 router.get('/posts', function(req, res, next) {
+	// after response is sent, make a API request and cache results
+	process.nextTick(loadCache);
+
+	// serve from cache?
+	if (_.keysIn(postsCache).length) {
+		var cachedResponse = _.chain(postsCache).sortBy('rawdate').reverse().value();
+		return res.json(cachedResponse);
+	}
+
+	// serve directly from api response, or error
 	request(model.getUrl(), function (err, response, body) {
 		var posts;
 

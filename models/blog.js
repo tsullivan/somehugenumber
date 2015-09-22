@@ -67,6 +67,7 @@ module.exports = {
 			baseObj = {
 				slug: postObj.slug,
 				title: postObj.title,
+				rawdate: postObj.date,
 				content: postObj.content
 			};
 

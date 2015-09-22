@@ -78,6 +78,7 @@ context('post', function () {
 				slug: 'this is slug',
 				title: 'this is title',
 				content: 'this is content',
+				rawdate: '2015-09-08T23:08:29.000-0700',
 				date: '2015-09-08T23:08:29.000-0700'
 			},
 			expectedPostModel = {
@@ -86,6 +87,7 @@ context('post', function () {
 				title: 'this is title',
 				content: 'this is content',
 				shortdate: '09-08-15',
+				rawdate: '2015-09-08T23:08:29.000-0700',
 				longdate: 'September 8th 2015, 11:08:29 pm'
 			};
 
