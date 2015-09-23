@@ -1,6 +1,14 @@
 {
-    "extends": [
-      "angular",
-      "eslint:recommended"
-    ]
+  "extends": [
+    "angular",
+    "eslint:recommended"
+  ],
+  "rules": {
+    "angular/di": 1,
+    "angular/ng_di": 1,
+    "angular/no-services": 1,
+    "angular/ng_no_services": 1,
+    "angular/controller-as-route": 1,
+    "angular/ng_controller_as_route": 1
+  }
 }
