@@ -13,14 +13,11 @@ block content
       li(ng-repeat='(key, post) in list.list')
         a(href='/blog/{{post.id}}/{{post.slug}}/{{post.shortdate}}') {{post.title}}
 
-    p(class='homebar')
+    p(class='backlink')
       a(href='/') Home
 
   script(type='text/ng-template' id='post.html')
     span(ng-if='post.error') There was an error. Status code: {{post.status}}. {{post.error}}
-
-    p(class='homefloater')
-      a(href='/') Home
 
     h2 {{post.title}}
 
@@ -29,8 +26,11 @@ block content
     p(class='dateline')
       i Posted: {{post.longdate}}
 
-    p(class='homebar')
-      a(href='/blog/') Back
+    ul(class='backlinks')
+      li
+        a(href='/blog/') Back
+      li
+        a(href='/') Home
 
   div(class='titlecontainer')
     h1= title
