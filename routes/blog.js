@@ -1,7 +1,8 @@
 /*eslint-disable no-unused-vars*/
 var express = require('express'),
 	request = require('request'),
-	model = require('../models/blog'),
+	moment = require('moment'),
+	model = require('../models/blog')({moment: moment}),
 	_ = require('lodash');
 
 var router = express.Router();

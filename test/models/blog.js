@@ -1,5 +1,6 @@
 var assert = require('assert'),
-	model = require('../../models/blog');
+	moment = require('moment'),
+	model = require('../../models/blog')({moment: moment});
 
 context('helper methods', function () {
 	describe('url', function () {

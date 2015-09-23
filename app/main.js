@@ -1,7 +1,7 @@
 require('!style!css!less!./custom-bootstrap.less'); // bootstrap custom theme
 require('./style.css'); // site-wide style
 
-var blogModel = require('models/blog');
+var blogModel = require('models/blog')();
 
 angular
 	.module('somehugenumberApp', ['ngRoute', 'ngSanitize'])
