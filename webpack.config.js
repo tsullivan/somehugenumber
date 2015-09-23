@@ -1,3 +1,7 @@
+/*
+ * Build config for dev environment
+ * Sets the defaults
+ */
 var webpack = require('webpack');
 var path = require('path');
 var buildPath = path.resolve(__dirname, 'public', 'build');
@@ -20,14 +24,20 @@ var config = {
 		filename: 'bundle.js',
 		publicPath: '/build/'
 	},
-	module: require('./config/webpackLoaders'),
+	module: {
+		loaders: [
+			{ test: /\.css$/, loader: 'style!css'},
+			{ test: /\.sass$/, loader: 'style!css!sass?indentedSyntax'}
+		]
+	},
 	resolve: {
 		alias: {
 			'models': path.resolve(__dirname, 'models')
 		}
 	},
 	plugins: [
-		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
+		new webpack.optimize.DedupePlugin(), // finds identical files in libraries' dependency trees
+		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js') // creates vendor.js based on my "vendor" scripts
 	]
 };
 
